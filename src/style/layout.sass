@@ -1,0 +1,19 @@
+@import mixins
+
+i
+  pointer-events: none
+
+h1
+  font-size: 160%
+h2
+  font-size: 140%
+h3
+  font-size: 100%
+
+body
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
+  @include font-size(1)
+  @include tablet
+    @include font-size(1.125)
+  @include desktop
+    @include font-size(1.25)

@@ -1,0 +1,22 @@
+$tablet-width: 768px
+$desktop-width: 1024px
+
+@mixin tablet
+  @media (min-width: $tablet-width)
+    @content
+
+@mixin desktop
+  @media (min-width: $desktop-width)
+    @content
+
+@mixin font-size ($sizeValue)
+  font-size: $sizeValue / 16 + px
+  font-size: $sizeValue + em
+
+@mixin clearfix
+  &:after
+    content: '.'
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
