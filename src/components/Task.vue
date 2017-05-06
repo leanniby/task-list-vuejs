@@ -34,6 +34,9 @@
     },
     methods: {
       changeName (newName) {
+        if (!newName) {
+          newName = 'Task ' + this.task.id
+        }
         this.$store.commit('changeNameTask', { taskId: this.task.id, newName: newName })
       },
       deleteTask () {

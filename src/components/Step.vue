@@ -31,6 +31,9 @@
     },
     methods: {
       changeName (newName) {
+        if (!newName) {
+          newName = 'Step ' + this.step.id
+        }
         this.$store.commit('changeNameStep', { taskId: this.taskId, stepId: this.step.id, newName: newName })
       },
       upProgress () {
