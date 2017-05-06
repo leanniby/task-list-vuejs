@@ -39,6 +39,10 @@ export default new Vuex.Store({
     deleteTask: (state, taskId) => {
       deleteByID(state.tasks, taskId)
     },
+    changeNameTask: (state, {taskId, newName}) => {
+      let task = getByID(state.tasks, taskId)
+      task.name = newName
+    },
     newStep: (state, taskId) => {
       let task = getByID(state.tasks, taskId)
       let newId = maxID(task.steps) + 1
@@ -52,6 +56,11 @@ export default new Vuex.Store({
     deleteStep: (state, {taskId, stepId}) => {
       let task = getByID(state.tasks, taskId)
       deleteByID(task.steps, stepId)
+    },
+    changeNameStep: (state, {taskId, stepId, newName}) => {
+      let task = getByID(state.tasks, taskId)
+      let step = getByID(task.steps, stepId)
+      step.name = newName
     },
     upProgressStep: (state, {taskId, stepId}) => {
       let task = getByID(state.tasks, taskId)
@@ -77,7 +86,6 @@ function getByID (arr, id) {
 }
 
 function deleteByID (arr, id) {
-  console.log(id)
   let index = arr.findIndex(e => e.id === id)
   if (index === -1) {
     return []

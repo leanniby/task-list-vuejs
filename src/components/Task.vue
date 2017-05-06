@@ -4,16 +4,20 @@
       <icon class='b-button__icon' name='times' scale='1.5'></icon>
     </button>
     <h2 class='task__progress'>{{ progressText }}</h2>
-    <!--<input class='task__title' @blur='endEditTitle'>-->
-    <h2 class='task__title'>{{ task.name }}</h2>
+    <span-input
+      tagName='h2'
+      className='task__title'
+      :value='task.name'
+      @change='changeName'></span-input>
     <step-list
       :taskId='task.id'
-      :steps='task.steps' />
+      :steps='task.steps'></step-list>
   </article>
 </template>
 
 <script>
   import StepList from './StepList'
+  import SpanInput from './SpanInput'
 
   export default {
     name: 'task',
@@ -29,11 +33,14 @@
       }
     },
     methods: {
+      changeName (newName) {
+        this.$store.commit('changeNameTask', { taskId: this.task.id, newName: newName })
+      },
       deleteTask () {
         this.$store.commit('deleteTask', this.task.id)
       }
     },
-    components: { StepList }
+    components: { StepList, SpanInput }
   }
 </script>
 

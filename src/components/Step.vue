@@ -9,12 +9,17 @@
       <span class='step__progress-label'
             :class='"step__progress--"+step.progress'>{{ progressText }}</span>
     </div>
-    <h3 class='b-task__name'>{{ step.name }}</h3>
+    <span-input
+      tagName='h3'
+      className='step__name'
+      :value='step.name'
+      @change='changeName'></span-input>
   </li>
 </template>
 
 <script>
   import { PROGRESS_STEP } from '../store/const'
+  import SpanInput from './SpanInput'
 
   export default {
     name: 'step',
@@ -25,13 +30,17 @@
       }
     },
     methods: {
+      changeName (newName) {
+        this.$store.commit('changeNameStep', { taskId: this.taskId, stepId: this.step.id, newName: newName })
+      },
       upProgress () {
         this.$store.commit('upProgressStep', { taskId: this.taskId, stepId: this.step.id })
       },
       deleteStep () {
         this.$store.commit('deleteStep', { taskId: this.taskId, stepId: this.step.id })
       }
-    }
+    },
+    components: { SpanInput }
   }
 </script>
 
